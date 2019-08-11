@@ -13,10 +13,10 @@ class ImageUploadHandler
     public function save($file, $floder, $file_prefix)
     {
         // 存储文件目录
-        $folder_name = 'uploads/images/'.$floder.'/' . date('YMd', time());
+        $folder_name = "uploads/images/$floder/" . date("YMd", time());
 
         // public_path 获取 public 文件夹的物理路径
-        $upload_path = public_path() . '/'.$folder_name;
+        $upload_path = public_path() . '/' . $folder_name;
 
         // 文件后缀名
         $extension = strtolower($file->getClientOriginalExtension()) ?: 'png';
