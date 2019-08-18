@@ -8,6 +8,9 @@ use App\Models\Category;
 
 class CategoriesController extends Controller
 {
+    /**
+     * 详情
+     */
     public function show(Category $category, Request $request, Topic $topic)
     {
         $topics = Topic::withOrder($request->order)

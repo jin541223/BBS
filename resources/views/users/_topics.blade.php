@@ -1,5 +1,4 @@
 @if(count($topics))
-
   <ul class="list-group mt-4 border-0">
     @foreach($topics as $topic)
       <li class="list-group-item pl-2 pr-2 border-right-0 border-left-0 @if($loop->first) border-top-0 @endif">
@@ -14,10 +13,8 @@
         </span>
     @endforeach
   </ul>
-
 @else
-
-  <div class="empty-block">暂无数据~~</div>
+  <div class="empty-block">没有数据</div>
 @endif
 
 <div class="mt-4 pt-1">
