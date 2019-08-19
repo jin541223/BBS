@@ -16537,3 +16537,47 @@ body {
   padding: 3px;
 }
 
+/*topic*/
+
+.topics-index-page .topic-list .nav > li > a,
+.categories-show-page .topic-list .nav > li > a {
+  position: relative;
+  display: block;
+  padding: 5px 14px;
+  font-size: 0.9em;
+}
+
+.topics-index-page a,
+.categories-show-page a {
+  color: #444444;
+}
+
+.topics-index-page .meta,
+.categories-show-page .meta {
+  font-size: 0.9em;
+  color: #b3b3b3;
+}
+
+.topics-index-page .meta a,
+.categories-show-page .meta a {
+  color: #b3b3b3;
+}
+
+.topics-index-page .badge,
+.categories-show-page .badge {
+  background-color: #d8d8d8;
+}
+
+.topics-index-page hr,
+.categories-show-page hr {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  border: 0;
+  border-top: 1px solid #dcebf5;
+}
+
+.topics-index-page #app > div.container,
+.categories-show-page #app > div.container {
+  margin-bottom: 100px;
+}
+

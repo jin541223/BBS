@@ -10,6 +10,7 @@
   <title>@yield('title', 'BBS') - 进阶练习</title>
 
   <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}">
+  @yield('styles')
 </head>
 <body>
   <div id="app" class="{{ route_class() }}-page">
@@ -26,5 +27,6 @@
   </div>
 
   <script src="{{ mix('js/app.js') }}"></script>
+  @yield('scripts')
 </body>
 </html>
