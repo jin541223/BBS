@@ -15,7 +15,17 @@
 <script>
   $(document).ready(function() {
     var editor = new Simditor({
-      textarea: $('#editor')
+      textarea: $('#editor'),
+      upload: {
+        url: '{{ route('topics.upload_image') }}', // 上传图片URL
+        params: {
+          _token: '{{ csrf_token() }}' // 防止CSRF跨站请求伪造的token参数
+        },
+        fileKey: 'upload_file', // 服务端获取图片键值
+        connectionCount: 3, // 最多上传图片数量
+        leaveConfirm: '文件上传中，关闭此页面将取消上传' // 上传过程中，用户关闭页面时提醒信息
+      },
+      pasteImage: true, // 设定是否支持图片黏贴上传
     });
   });
 </script>
