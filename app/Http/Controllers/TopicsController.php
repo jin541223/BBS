@@ -9,6 +9,7 @@ use App\Http\Requests\TopicRequest;
 use App\Models\Category;
 use Auth;
 use App\Handlers\ImageUploadHandler;
+use App\Models\User;
 
 class TopicsController extends Controller
 {
@@ -24,7 +25,7 @@ class TopicsController extends Controller
 		return view('topics.index', compact('topics'));
 	}
 
-    public function show(Request $request, Topic $topic)
+    public function show(Request $request, Topic $topic, User $user)
     {
         if ( ! empty($topic->slug) && $topic->slug != $request->slug) {
             return redirect($topic->link(), 301);

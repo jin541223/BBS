@@ -41,6 +41,7 @@
             {!! $topic->body !!}
           </div>
 
+          @can('update', $topic)
           <div class="operate">
             <hr>
             <a href="{{ route('topics.edit', $topic->id) }}" class="btn btn-outline-secondary btn-sm" role="button">
@@ -54,9 +55,18 @@
               </button>
             </form>
           </div>
+          @endcan
 
         </div>
       </div>
+
+      <div class="card topic-reply mt-4">
+        <div class="card-body">
+            @include('topics._reply_box', ['topic' => $topic])
+            @include('topics._reply_list', ['replies' => $topic->replies()->with('user')->get()])
+        </div>
+      </div>
+
     </div>
   </div>
 @endsection
