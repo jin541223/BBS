@@ -2,28 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Auth;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
-use Auth;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
     use MustVerifyEmailTrait;
 
     use Notifiable {
-        notify as protected laravelNotify;
-    }
-
-    /**
+        notify as laravelNotify;}/**
      * The attributes that are mass assignable.
      * 防止用户随意修改模型数据，只有在此属性中定义的字段，才允许修改，否则会被忽略
      * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password', 'introduction', 'avatar'
+     */protected $fillable = [
+        'name', 'phone', 'email', 'password', 'introduction', 'avatar',
     ];
 
     /**
@@ -44,22 +39,22 @@ class User extends Authenticatable implements MustVerifyEmailContract
         'email_verified_at' => 'datetime',
     ];
 
-    public function topics()
+    function topics()
     {
         return $this->hasMany(Topic::class);
     }
 
-    public function isAuthorOf($model)
+    function isAuthorOf($model)
     {
         return $this->id == $model->user_id;
     }
 
-    public function replies()
+    function replies()
     {
         return $this->hasMany(Reply::class);
     }
 
-    public function notify($instance)
+    function notify($instance)
     {
         // 校验要通知的用户是否为本人
         if ($this->id == Auth::id()) {
@@ -73,7 +68,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
         $this->laravelNotify($instance);
     }
 
-    public function markAsRead()
+    function markAsRead()
     {
         $this->notification_count = 0;
         $this->save();
