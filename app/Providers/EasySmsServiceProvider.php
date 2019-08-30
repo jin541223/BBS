@@ -8,6 +8,15 @@ use Overtrue\EasySms\EasySms;
 class EasySmsServiceProvider extends ServiceProvider
 {
     /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+    }
+    /**
      * Register services.
      *
      * @return void
@@ -19,15 +28,5 @@ class EasySmsServiceProvider extends ServiceProvider
         });
 
         $this->app->alias(EasySms::class, 'easysms');
-    }
-
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
     }
 }
