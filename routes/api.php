@@ -18,14 +18,17 @@ $api->version('v1', [
 ], function ($api) {
     $api->group([
         'middleware' => 'api.throttle',
-        'limit'      => 1,
-        'expires'    => 1,
+        'limit'      => config('api.rate_limits.sign.limit'),
+        'expires'    => config('api.rate_limits.sign.expires'),
     ], function ($api) {
         // 短信验证
         $api->post('verificationCodes', 'VerificationCodesController@store')
             ->name('api.verificationCodes.store');
         // 注册
-        $api->post('users', 'usersController@store')
+        $api->post('users', 'UsersController@store')
             ->name('api.users.store');
+        // 图形验证码
+        $api->post('captchas', 'CaptchasController@store')
+            ->name('api.captchas.store');
     });
 });

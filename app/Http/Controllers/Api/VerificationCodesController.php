@@ -10,7 +10,9 @@ class VerificationCodesController extends Controller
     public function store(VerificationCodeRequest $request, EasySms $easySms)
     {
         $phone = $request->phone;
-        // 生成四位随机数，左边不够补0
+
+        // 生成4位随机数，左侧补0
+
         $code = str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
 
         try {
@@ -19,13 +21,13 @@ class VerificationCodesController extends Controller
             ]);
         } catch (\Overtrue\EasySms\Exceptions\NoGatewayAvailableException $exception) {
             $message = $exception->getException('yunpian')->getMessage();
-
             return $this->response->errorInternal($message ?: '短信发送异常');
         }
 
         $key       = 'verificationCode_' . str_random(15);
         $expiredAt = now()->addMinutes(10);
-        // 验证码缓存
+
+        // 缓存验证码 10分钟过期。
         \Cache::put($key, ['phone' => $phone, 'code' => $code], $expiredAt);
 
         return $this->response->array([
