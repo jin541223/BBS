@@ -8,8 +8,8 @@ class Request extends FormRequest
 {
     public function authorize()
     {
-    	return [
-            'content' => 'required|min:2'
+        return [
+            'content' => 'required|min:2',
         ];
     }
 }
