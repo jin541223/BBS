@@ -1,7 +1,6 @@
 <?php
 namespace App\Handlers;
 
-use Illuminate\Support\Str;
 use Image;
 
 /**
@@ -42,7 +41,7 @@ class ImageUploadHandler
     {
         $image = Image::make($file_path);
 
-        $image->resize($max_width, null, function($constraint) {
+        $image->resize($max_width, null, function ($constraint) {
             // 设定宽度为 $max_width, 高度等比例缩放
             $constraint->aspectRatio();
 
