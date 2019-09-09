@@ -18,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
      * 防止用户随意修改模型数据，只有在此属性中定义的字段，才允许修改，否则会被忽略
      * @var array
      */protected $fillable = [
-        'name', 'phone', 'email', 'password', 'introduction', 'avatar',
+        'name', 'phone', 'email', 'password', 'introduction', 'avatar', 'weixin_openid', 'weixin_unionid',
     ];
 
     /**
