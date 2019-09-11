@@ -7,8 +7,9 @@ use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements MustVerifyEmailContract
+class User extends Authenticatable implements MustVerifyEmailContract, JWTSubject
 {
     use MustVerifyEmailTrait;
 
@@ -18,7 +19,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
      * 防止用户随意修改模型数据，只有在此属性中定义的字段，才允许修改，否则会被忽略
      * @var array
      */protected $fillable = [
-        'name', 'phone', 'email', 'password', 'introduction', 'avatar',
+        'name', 'phone', 'email', 'password', 'introduction', 'avatar', 'weixin_openid', 'weixin_unionid',
     ];
 
     /**
@@ -73,5 +74,21 @@ class User extends Authenticatable implements MustVerifyEmailContract
         $this->notification_count = 0;
         $this->save();
         $this->unreadNotifications->markAsRead();
+    }
+
+    /**
+     * 用户ID
+     */
+    function getJwtIdentifier()
+    {
+        return $this->getkey();
+    }
+
+    /**
+     * 自定义内容
+     */
+    function getJwtCustomClaims()
+    {
+        return [];
     }
 }
