@@ -7,8 +7,9 @@ use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements MustVerifyEmailContract
+class User extends Authenticatable implements MustVerifyEmailContract, JWTSubject
 {
     use MustVerifyEmailTrait;
 
@@ -73,5 +74,21 @@ class User extends Authenticatable implements MustVerifyEmailContract
         $this->notification_count = 0;
         $this->save();
         $this->unreadNotifications->markAsRead();
+    }
+
+    /**
+     * 用户ID
+     */
+    function getJwtIdentifier()
+    {
+        return $this->getkey();
+    }
+
+    /**
+     * 自定义内容
+     */
+    function getJwtCustomClaims()
+    {
+        return [];
     }
 }
